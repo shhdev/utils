@@ -1,8 +1,12 @@
 {
   "name": "@shhdev/utils",
-  "version": "0.0.0",
-  "private": true,
-  "main": "src/index.ts",
+  "version": "0.1.0",
+  "description": "Shared utilities used across shh packages to create a unified experience",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest",
     "build": "tsc"
