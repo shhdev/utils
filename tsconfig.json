@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "noEmit": true,
     "allowJs": true,
     "esModuleInterop": true,
     "declaration": true,
@@ -20,5 +19,8 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "**/*.test.*"
   ]
 }
