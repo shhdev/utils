@@ -1,35 +1,38 @@
-import crypto from 'crypto'
+import CryptoJS from 'crypto-js'
 
-const hashAlgo = 'sha256'
-const encryptAlgo = 'aes256'
-const inEnc = 'hex'
-const outEnc = 'utf8'
-const iv = Buffer.alloc(16)
+const iv = CryptoJS.enc.Hex.parse('00000000000000000000000000000000')
 
-const generateBuffer = (value: string) => {
-  return Buffer.from(value, outEnc)
+const generateWordArray = (str: string) => {
+  return CryptoJS.enc.Utf8.parse(str)
 }
 
-const generateKey = (secret: string, salt: string) => {
-  return crypto.scryptSync(generateBuffer(secret), generateBuffer(salt), 32)
+const generateKey = (password: string, salt: string) => {
+  return CryptoJS.PBKDF2(generateWordArray(password), generateWordArray(salt), {
+    keySize: 256 / 32
+  })
 }
 
-const decrypt = (value: string, secret: string, salt: string) => {
+const decrypt = (ciphertext: string, secret: string, salt: string) => {
+  const cipherParams = CryptoJS.lib.CipherParams.create({
+    ciphertext: CryptoJS.enc.Base64.parse(ciphertext)
+  })
+
   const key = generateKey(secret, salt)
-  const decipher = crypto.createDecipheriv(encryptAlgo, key, iv)
 
-  return decipher.update(value, inEnc, outEnc) + decipher.final(outEnc)
+  return CryptoJS.AES.decrypt(cipherParams, key, { iv }).toString(CryptoJS.enc.Utf8)
 }
 
-const encrypt = (value: string, secret: string, salt: string) => {
+const encrypt = (message: string, secret: string, salt: string) => {
+  const value = CryptoJS.enc.Utf8.parse(message)
   const key = generateKey(secret, salt)
-  const cipher = crypto.createCipheriv(encryptAlgo, key, iv)
 
-  return cipher.update(value, outEnc, inEnc) + cipher.final(inEnc)
+  return CryptoJS.AES.encrypt(value, key, { iv }).ciphertext.toString(CryptoJS.enc.Base64)
 }
 
-const hash = (value: string, salt: string) => {
-  return crypto.createHash(hashAlgo).update(generateBuffer(value)).update(generateBuffer(salt)).digest(inEnc)
+const hash = (message: string, salt: string) => {
+  const messageArray = generateWordArray(message + salt)
+
+  return CryptoJS.SHA3(messageArray, { outputLength: 256 }).toString(CryptoJS.enc.Base64)
 }
 
 export { decrypt, encrypt, hash }

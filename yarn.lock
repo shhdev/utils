@@ -818,9 +818,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@shhdev/utils@workspace:."
   dependencies:
+    "@types/crypto-js": ^4.1.1
     "@types/jest": ^29.0.1
     "@typescript-eslint/eslint-plugin": ^5.37.0
     "@typescript-eslint/parser": ^5.37.0
+    crypto-js: ^4.1.1
     eslint: ^8.23.1
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
@@ -901,6 +903,13 @@ __metadata:
   dependencies:
     "@babel/types": ^7.3.0
   checksum: f9bd5c16c1a178489394235826e3793da6be2f50fe9abd3ce29b6a53a554575d88d20a4a377a4d9e8cab4a25243bc4dc8b9b68d9f65dc212b8e0a7ccaf5f10e8
+  languageName: node
+  linkType: hard
+
+"@types/crypto-js@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "@types/crypto-js@npm:4.1.1"
+  checksum: e53b712c5d3b72d19c67a06c8bbaaafd989d78f71a2168f1376c8fb84d5744e5166b58d79528a124645e13f13fe4d2c97ee8f03d649ef913e93ca6b8cee41370
   languageName: node
   linkType: hard
 
@@ -1625,6 +1634,13 @@ __metadata:
     shebang-command: ^2.0.0
     which: ^2.0.1
   checksum: 5738c312387081c98d69c98e105b6327b069197f864a60593245d64c8089c8a0a744e16349281210d56835bb9274130d825a78b2ad6853ca13cfbeffc0c31750
+  languageName: node
+  linkType: hard
+
+"crypto-js@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "crypto-js@npm:4.1.1"
+  checksum: 50cc66a35f2738171d9a6d80c85ba7d00cb6440b756db035ba9ccd03032c0a803029a62969ecd4c844106c980af87687c64b204dd967989379c4f354fb482d37
   languageName: node
   linkType: hard
 
